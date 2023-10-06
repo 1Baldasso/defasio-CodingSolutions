@@ -16,6 +16,7 @@ public static class ResponseMappings
             Nome = cliente.Nome,
             Email = cliente.Email,
             CPF = cliente.CPF,
+            Saldo = cliente.Saldo,
             Produtos = cliente.ProdutoPorCliente.Select(x => new ProdutoComprado(x.Produto.Nome, x.Quantidade)).ToList()
         };
     }

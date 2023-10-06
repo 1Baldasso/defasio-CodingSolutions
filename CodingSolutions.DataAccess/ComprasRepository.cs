@@ -13,12 +13,24 @@ internal class ComprasRepository : IComprasRepository
         _context = context;
     }
 
+    public async Task CarregarSaldoAsync(Guid idCliente, decimal valor)
+    {
+        await _context.Clientes.FindAsync(idCliente);
+    }
+
     public async Task ComprarAsync(Guid id, Guid clienteId, int quantidade, CancellationToken ct)
     {
         var produto = await _context.Produtos.FindAsync(id);
         var cliente = await _context.Clientes.FindAsync(clienteId);
-        if (produto == null) throw new Exception("Produto não encontrado");
-        if (cliente == null) throw new Exception("Cliente não encontrado");
+        if (produto == null)
+            throw new Exception("Produto não encontrado");
+        if (cliente == null)
+            throw new Exception("Cliente não encontrado");
+        if (produto.Preco * quantidade > cliente.Saldo)
+            throw new Exception("Saldo insuficiente");
+        var entry = _context.Entry(cliente);
+        cliente.Saldo -= produto.Preco * quantidade;
+        entry.State = EntityState.Modified;
         await _context.ProdutosClientes.AddAsync(new ProdutoCliente
         {
             Cliente = cliente,

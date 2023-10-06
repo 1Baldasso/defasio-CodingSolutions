@@ -4,6 +4,7 @@ using CodingSolutions.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingSolutions.DataAccess.Migrations
 {
     [DbContext(typeof(SolutionDbContext))]
-    partial class SolutionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231006120221_AddColumnSaldoCliente")]
+    partial class AddColumnSaldoCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
