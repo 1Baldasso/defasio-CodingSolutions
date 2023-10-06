@@ -44,7 +44,6 @@ app.UseFastEndpoints(options =>
     options.Endpoints.Configurator = ep =>
     {
         ep.AllowAnonymous();
-        ep.Options(o => o.RequireCors("AllowAll"));
     };
 });
 // Configure the HTTP request pipeline.
