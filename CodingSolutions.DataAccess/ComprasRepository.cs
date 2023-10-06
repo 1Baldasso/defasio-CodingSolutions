@@ -44,6 +44,8 @@ internal class ComprasRepository : IComprasRepository
     {
         return await _context.ProdutosClientes.Include(x => x.Cliente)
             .Include(x => x.Produto)
+            .AsNoTracking()
+            .AsSplitQuery()
             .ToListAsync(ct);
     }
 }

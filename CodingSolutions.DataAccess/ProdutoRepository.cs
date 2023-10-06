@@ -30,6 +30,7 @@ internal class ProdutoRepository : IProdutoRepository
     {
         return await _context.Produtos.Include(x => x.ProdutoPorCliente)
             .ThenInclude(x => x.Cliente)
+            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id, ct);
     }
 
@@ -37,6 +38,7 @@ internal class ProdutoRepository : IProdutoRepository
     {
         return await _context.Produtos.Include(x => x.ProdutoPorCliente)
             .ThenInclude(x => x.Cliente)
+            .AsNoTracking()
             .ToListAsync(ct);
     }
 
