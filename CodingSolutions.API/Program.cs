@@ -4,18 +4,17 @@ using CodingSolutions.API.Swagger;
 using CodingSolutions.DataAccess.Registering;
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var vaultClient = new SecretClient(
-        new Uri(config["KeyVault"]),
+        new Uri(config["AzureKeyVault:Endpoint"]),
         new DefaultAzureCredential(new DefaultAzureCredentialOptions
         {
-            ManagedIdentityClientId = config["directoryId"]
+            ManagedIdentityClientId = config["AzureKeyVault:DirectoryId"]
         }));
-var connectionString = vaultClient.GetSecret("desafioCSConnectionString").Value.Value;
+var connectionString = await vaultClient.GetSecretAsync("connectionStringTesteCS");
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +30,7 @@ builder.Services.SwaggerDocument(opt =>
     };
 });
 
-builder.Services.AddDataAccess(connectionString);
+builder.Services.AddDataAccess(connectionString.Value.Value);
 builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy => policy.AllowAnyOrigin()));
 
 var app = builder.Build();

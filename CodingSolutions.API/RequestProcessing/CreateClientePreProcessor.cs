@@ -1,4 +1,5 @@
 ﻿using CodingSolutions.API.Models.Cliente;
+using CodingSolutions.Domain.Transformations;
 using CodingSolutions.Domain.Validators;
 using FastEndpoints;
 using FluentValidation.Results;
@@ -9,7 +10,7 @@ public class CreateClientePreProcessor : IPreProcessor<ClienteCreateDTO>
 {
     public async Task PreProcessAsync(ClienteCreateDTO req, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
     {
-        var vr = await new ClienteValidator().ValidateAsync(req);
+        var vr = await new ClienteValidator().ValidateAsync(req.TransformClienteData());
         if (!vr.IsValid)
         {
             failures.AddRange(vr.Errors);

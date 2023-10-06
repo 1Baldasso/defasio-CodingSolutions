@@ -1,6 +1,6 @@
 ﻿namespace CodingSolutions.API.Mappings;
 
-public static class DTOMapping
+public static class GenericMappings
 {
     public static TEntity ToEntity<TDto, TEntity>(this TDto dto)
         where TDto : class, TEntity

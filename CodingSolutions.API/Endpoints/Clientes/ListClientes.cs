@@ -1,22 +1,17 @@
-﻿using CodingSolutions.Domain;
+﻿using CodingSolutions.API.Mappings;
+using CodingSolutions.API.Models.Cliente;
+using CodingSolutions.Domain;
 using CodingSolutions.Domain.Repositories;
 using FastEndpoints;
 
 namespace CodingSolutions.API.Endpoints.Clientes;
 
 [HttpGet("clientes")]
-public class ListClientes : EndpointWithoutRequest<IEnumerable<Cliente>>
+public class ListClientes : EndpointWithoutRequest<IEnumerable<ClienteResponseDTO>>
 {
-    private readonly IClienteRepository _clienteRepository;
-
-    public ListClientes(IClienteRepository clienteRepository)
-    {
-        _clienteRepository = clienteRepository;
-    }
-
     public override async Task HandleAsync(CancellationToken cancellationToken = default)
     {
-        var clientes = await _clienteRepository.ListAllAsync(cancellationToken);
-        await SendOkAsync(clientes);
+        var clientes = await Resolve<IClienteRepository>().ListAllAsync(cancellationToken);
+        await SendOkAsync(clientes.Select(x => x.ToResponseDTO()));
     }
 }

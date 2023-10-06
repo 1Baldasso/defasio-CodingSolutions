@@ -7,16 +7,8 @@ namespace CodingSolutions.API.Endpoints.Clientes;
 [HttpDelete("clientes/{id:guid}")]
 public class DeleteCliente : Endpoint<IdFromRouteDTO>
 {
-    private readonly IClienteRepository _clienteRepository;
-
-    public DeleteCliente(IClienteRepository clienteRepository)
+    public override async Task HandleAsync(IdFromRouteDTO req, CancellationToken ct)
     {
-        _clienteRepository = clienteRepository;
-    }
-
-    public override Task HandleAsync(IdFromRouteDTO req, CancellationToken ct)
-    {
-        _clienteRepository.Delete(req.Id);
-        return Task.CompletedTask;
+        await Resolve<IClienteRepository>().Delete(req.Id);
     }
 }

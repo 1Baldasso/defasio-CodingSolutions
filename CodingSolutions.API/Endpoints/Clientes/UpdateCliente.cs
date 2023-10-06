@@ -9,13 +9,6 @@ namespace CodingSolutions.API.Endpoints.Clientes;
 
 public class UpdateCliente : Endpoint<ClienteUpdateDTO>
 {
-    private readonly IClienteRepository _repository;
-
-    public UpdateCliente(IClienteRepository repository)
-    {
-        _repository = repository;
-    }
-
     public override void Configure()
     {
         Put("clientes/{id:guid}");
@@ -24,7 +17,7 @@ public class UpdateCliente : Endpoint<ClienteUpdateDTO>
 
     public override async Task HandleAsync(ClienteUpdateDTO req, CancellationToken ct)
     {
-        await _repository.UpdateAsync(req.ToEntity<ClienteUpdateDTO, Cliente>(), ct);
+        await Resolve<IClienteRepository>().UpdateAsync(req.ToEntity<ClienteUpdateDTO, Cliente>(), ct);
         await SendOkAsync("Cliente atualizado com sucesso");
     }
 }

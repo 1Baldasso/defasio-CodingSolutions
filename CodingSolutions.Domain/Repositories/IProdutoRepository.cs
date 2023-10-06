@@ -10,7 +10,5 @@ public interface IProdutoRepository
 
     Task UpdateAsync(Produto produto, CancellationToken ct = default);
 
-    void Delete(Guid id);
-
-    Task ComprarAsync(Guid id, Guid clienteId, CancellationToken ct);
+    Task Delete(Guid id);
 }

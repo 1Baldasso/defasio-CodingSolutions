@@ -15,16 +15,9 @@ public class CreateCliente : Endpoint<ClienteCreateDTO>
         PreProcessors(new CreateClientePreProcessor());
     }
 
-    private readonly IClienteRepository _repository;
-
-    public CreateCliente(IClienteRepository repository)
-    {
-        _repository = repository;
-    }
-
     public override async Task HandleAsync(ClienteCreateDTO req, CancellationToken ct)
     {
-        await _repository.CreateAsync(req.ToEntity<ClienteCreateDTO, Cliente>(), ct);
+        await Resolve<IClienteRepository>().CreateAsync(req.ToEntity<ClienteCreateDTO, Cliente>(), ct);
         await SendCreatedAtAsync<ListClientes>(null, "Cliente criado com sucesso");
     }
 }

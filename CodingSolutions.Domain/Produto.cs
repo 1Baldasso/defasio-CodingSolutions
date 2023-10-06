@@ -6,5 +6,5 @@ public record Produto
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public decimal Preco { get; set; }
-    public virtual ICollection<Cliente> Clientes { get; set; }
+    public ICollection<ProdutoCliente> ProdutoPorCliente { get; set; }
 }

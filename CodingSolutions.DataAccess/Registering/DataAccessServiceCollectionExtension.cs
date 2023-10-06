@@ -12,8 +12,9 @@ public static class DataAccessServiceCollectionExtension
         {
             options.UseSqlServer(connectionString);
         });
-        services.AddSingleton<IClienteRepository, ClienteMockRepository>();
-        services.AddSingleton<IProdutoRepository, ProdutoMockRepository>();
+        services.AddScoped<IClienteRepository, ClienteRepository>();
+        services.AddScoped<IProdutoRepository, ProdutoRepository>();
+        services.AddScoped<IComprasRepository, ComprasRepository>();
         return services;
     }
 }

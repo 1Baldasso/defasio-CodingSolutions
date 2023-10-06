@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CodingSolutions.Domain;
+using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System.Text.Json.Serialization;
 
@@ -11,5 +12,5 @@ public record ProdutoUpdateDTO : Domain.Produto
     public new Guid Id { get; set; }
 
     [OpenApiIgnore, JsonIgnore]
-    public new ICollection<Domain.Cliente> Clientes { get; set; }
+    public new ICollection<ProdutoCliente> ProdutoPorCliente { get; set; }
 }

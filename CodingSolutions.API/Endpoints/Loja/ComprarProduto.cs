@@ -14,7 +14,7 @@ public class ComprarProduto : Endpoint<ComprarProdutoDTO>
 
     public override async Task HandleAsync(ComprarProdutoDTO req, CancellationToken ct)
     {
-        await Resolve<IProdutoRepository>().ComprarAsync(req.ProdutoId, req.ClienteId, ct);
+        await Resolve<IComprasRepository>().ComprarAsync(req.ProdutoId, req.ClienteId, req.Quantidade, ct);
         await SendOkAsync($"Produto {req.ProdutoId} comprado com sucesso");
     }
 }

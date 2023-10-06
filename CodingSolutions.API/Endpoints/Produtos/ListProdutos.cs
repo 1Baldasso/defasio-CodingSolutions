@@ -1,22 +1,16 @@
-﻿using CodingSolutions.Domain;
+﻿using CodingSolutions.API.Mappings;
+using CodingSolutions.API.Models.Produto;
 using CodingSolutions.Domain.Repositories;
 using FastEndpoints;
 
 namespace CodingSolutions.API.Endpoints.Produtos;
 
 [HttpGet("produtos")]
-public class ListProdutos : EndpointWithoutRequest<IEnumerable<Produto>>
+public class ListProdutos : EndpointWithoutRequest<IEnumerable<ProdutoResponseDTO>>
 {
-    private readonly IProdutoRepository _produtoRepository;
-
-    public ListProdutos(IProdutoRepository produtoRepository)
-    {
-        _produtoRepository = produtoRepository;
-    }
-
     public override async Task HandleAsync(CancellationToken cancellationToken = default)
     {
-        var produtos = await _produtoRepository.ListAllAsync(cancellationToken);
-        await SendOkAsync(produtos, cancellationToken);
+        var produtos = await Resolve<IProdutoRepository>().ListAllAsync(cancellationToken);
+        await SendOkAsync(produtos.Select(x => x.ToResponseDTO()), cancellationToken);
     }
 }

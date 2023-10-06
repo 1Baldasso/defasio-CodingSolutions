@@ -1,26 +1,21 @@
-﻿using CodingSolutions.API.Models;
+﻿using CodingSolutions.API.Mappings;
+using CodingSolutions.API.Models;
+using CodingSolutions.API.Models.Produto;
 using CodingSolutions.Domain.Repositories;
 using FastEndpoints;
 
 namespace CodingSolutions.API.Endpoints.Produtos;
 
 [HttpGet("produtos/{id:guid}")]
-public class GetProduto : Endpoint<IdFromRouteDTO>
+public class GetProduto : Endpoint<IdFromRouteDTO, ProdutoResponseDTO>
 {
-    private readonly IProdutoRepository _repository;
-
-    public GetProduto(IProdutoRepository repository)
-    {
-        _repository = repository;
-    }
-
     public override async Task HandleAsync(IdFromRouteDTO request, CancellationToken cancellationToken)
     {
-        var produto = await _repository.GetByIdAsync(request.Id, cancellationToken);
+        var produto = await Resolve<IProdutoRepository>().GetByIdAsync(request.Id, cancellationToken);
         if (produto == null)
         {
             await SendNotFoundAsync(cancellationToken);
         }
-        await SendOkAsync(produto, cancellationToken);
+        await SendOkAsync(produto.ToResponseDTO(), cancellationToken);
     }
 }
