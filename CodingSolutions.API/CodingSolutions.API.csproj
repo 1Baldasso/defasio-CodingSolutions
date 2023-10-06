@@ -35,4 +35,10 @@
     <ProjectReference Include="..\CodingSolutions.Infrastructure\CodingSolutions.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

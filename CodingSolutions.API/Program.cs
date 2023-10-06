@@ -8,14 +8,6 @@ using FastEndpoints.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-var vaultClient = new SecretClient(
-        new Uri(config["AzureKeyVault:Endpoint"]),
-        new DefaultAzureCredential(new DefaultAzureCredentialOptions
-        {
-            ManagedIdentityClientId = config["AzureKeyVault:DirectoryId"]
-        }));
-var secret = await vaultClient.GetSecretAsync("connectionStringTesteCS");
-var connectionString = secret.Value.Value ?? config.GetConnectionString("DefaultConnection");
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,6 +23,7 @@ builder.Services.SwaggerDocument(opt =>
     };
 });
 
+var connectionString = config.GetConnectionString("DefaultConnection");
 builder.Services.AddDataAccess(connectionString);
 builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy => policy.AllowAnyOrigin()));
 
