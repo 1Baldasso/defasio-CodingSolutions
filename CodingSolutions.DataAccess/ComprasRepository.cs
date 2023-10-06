@@ -30,7 +30,7 @@ internal class ComprasRepository : IComprasRepository
             throw new Exception("Saldo insuficiente");
         var entry = _context.Entry(cliente);
         cliente.Saldo -= produto.Preco * quantidade;
-        entry.State = EntityState.Modified;
+        entry.CurrentValues.SetValues(cliente);
         await _context.ProdutosClientes.AddAsync(new ProdutoCliente
         {
             Cliente = cliente,
