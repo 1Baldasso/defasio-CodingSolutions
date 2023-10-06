@@ -25,7 +25,10 @@ builder.Services.SwaggerDocument(opt =>
 
 var connectionString = config.GetConnectionString("DefaultConnection");
 builder.Services.AddDataAccess(connectionString);
-builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy => policy.AllowAnyOrigin()));
+builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy =>
+    policy.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()));
 
 var app = builder.Build();
 app.UseFastEndpoints(options =>
