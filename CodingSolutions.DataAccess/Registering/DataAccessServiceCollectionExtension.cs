@@ -10,7 +10,7 @@ public static class DataAccessServiceCollectionExtension
     {
         services.AddDbContext<SolutionDbContext>(options =>
         {
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString, opt => opt.EnableRetryOnFailure());
         });
         services.AddScoped<IClienteRepository, ClienteRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();

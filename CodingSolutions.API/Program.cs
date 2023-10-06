@@ -4,6 +4,7 @@ using CodingSolutions.API.Swagger;
 using CodingSolutions.DataAccess.Registering;
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +26,16 @@ builder.Services.SwaggerDocument(opt =>
 
 var connectionString = config.GetConnectionString("DefaultConnection");
 builder.Services.AddDataAccess(connectionString);
-builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy =>
-    policy.AllowAnyOrigin()
+builder.Services.AddCors(x =>
+{
+    var policy = new CorsPolicyBuilder()
     .AllowAnyHeader()
-    .AllowAnyMethod()));
+    .AllowAnyMethod()
+    .AllowAnyOrigin()
+    .Build();
+    x.AddDefaultPolicy(policy);
+    x.AddPolicy("AllowAll", policy);
+});
 
 var app = builder.Build();
 app.UseFastEndpoints(options =>
@@ -37,7 +44,7 @@ app.UseFastEndpoints(options =>
     options.Endpoints.Configurator = ep =>
     {
         ep.AllowAnonymous();
-        ep.Options(o => o.RequireCors(x => x.AllowAnyOrigin()));
+        ep.Options(o => o.RequireCors("AllowAll"));
     };
 });
 // Configure the HTTP request pipeline.
