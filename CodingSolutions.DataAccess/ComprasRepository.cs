@@ -15,7 +15,13 @@ internal class ComprasRepository : IComprasRepository
 
     public async Task CarregarSaldoAsync(Guid idCliente, decimal valor)
     {
-        await _context.Clientes.FindAsync(idCliente);
+        var originalCliente = await _context.Clientes.FindAsync(idCliente);
+        if (originalCliente == null)
+            throw new Exception("Cliente não encontrado");
+        var entry = _context.Entry(originalCliente);
+        originalCliente.Saldo += valor;
+        entry.CurrentValues.SetValues(originalCliente);
+        await _context.SaveChangesAsync();
     }
 
     public async Task ComprarAsync(Guid id, Guid clienteId, int quantidade, CancellationToken ct)
