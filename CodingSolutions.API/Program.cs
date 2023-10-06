@@ -14,7 +14,8 @@ var vaultClient = new SecretClient(
         {
             ManagedIdentityClientId = config["AzureKeyVault:DirectoryId"]
         }));
-var connectionString = await vaultClient.GetSecretAsync("connectionStringTesteCS");
+var secret = await vaultClient.GetSecretAsync("connectionStringTesteCS");
+var connectionString = secret.Value.Value ?? config.GetConnectionString("DefaultConnection");
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -30,7 +31,7 @@ builder.Services.SwaggerDocument(opt =>
     };
 });
 
-builder.Services.AddDataAccess(connectionString.Value.Value);
+builder.Services.AddDataAccess(connectionString);
 builder.Services.AddCors(builder => builder.AddDefaultPolicy(policy => policy.AllowAnyOrigin()));
 
 var app = builder.Build();
