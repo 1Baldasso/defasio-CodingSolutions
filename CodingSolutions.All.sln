@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingSolutions.API", "CodingSolutions.API\CodingSolutions.API.csproj", "{EB53F00C-1DA6-4A0F-9D3E-9A6216AA0380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingSolutions.API", "CodingSolutions.API\CodingSolutions.API.csproj", "{EB53F00C-1DA6-4A0F-9D3E-9A6216AA0380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingSolutions.Domain", "CodingSolutions.Domain\CodingSolutions.Domain.csproj", "{BD92063B-72F2-4B8F-AAC9-6AFCB763789C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingSolutions.Domain", "CodingSolutions.Domain\CodingSolutions.Domain.csproj", "{BD92063B-72F2-4B8F-AAC9-6AFCB763789C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingSolutions.DataAccess", "CodingSolutions.DataAccess\CodingSolutions.DataAccess.csproj", "{CAFE7642-E5C3-4978-B82C-74982A7F6004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingSolutions.DataAccess", "CodingSolutions.DataAccess\CodingSolutions.DataAccess.csproj", "{CAFE7642-E5C3-4978-B82C-74982A7F6004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingSolutions.Infrastructure", "CodingSolutions.Infrastructure\CodingSolutions.Infrastructure.csproj", "{051199B7-5409-4A82-AC95-13E0DEE6245A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingSolutions.Infrastructure", "CodingSolutions.Infrastructure\CodingSolutions.Infrastructure.csproj", "{051199B7-5409-4A82-AC95-13E0DEE6245A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

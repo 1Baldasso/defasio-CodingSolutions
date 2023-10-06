@@ -24,5 +24,10 @@ internal class ClienteMapping : IEntityTypeConfiguration<Cliente>
             .IsUnique();
         builder.HasMany(x => x.ProdutoPorCliente)
             .WithOne(x => x.Cliente);
+
+        builder.Property(x => x.Saldo)
+            .HasColumnType("DECIMAL(10,2)")
+            .HasDefaultValue(500)
+            .IsRequired();
     }
 }

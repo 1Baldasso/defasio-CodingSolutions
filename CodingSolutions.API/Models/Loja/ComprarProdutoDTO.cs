@@ -1,7 +1,4 @@
-﻿using FastEndpoints;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CodingSolutions.API.Models.Loja;
+﻿namespace CodingSolutions.API.Models.Loja;
 
 public record ComprarProdutoDTO
 {

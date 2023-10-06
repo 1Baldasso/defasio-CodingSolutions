@@ -2,7 +2,6 @@
 using CodingSolutions.API.Models.Loja;
 using CodingSolutions.API.Models.Produto;
 using CodingSolutions.Domain;
-using System.Runtime.CompilerServices;
 
 namespace CodingSolutions.API.Mappings;
 
@@ -16,6 +15,7 @@ public static class ResponseMappings
             Nome = cliente.Nome,
             Email = cliente.Email,
             CPF = cliente.CPF,
+            Saldo = cliente.Saldo,
             Produtos = cliente.ProdutoPorCliente.Select(x => new ProdutoComprado(x.Produto.Nome, x.Quantidade)).ToList()
         };
     }

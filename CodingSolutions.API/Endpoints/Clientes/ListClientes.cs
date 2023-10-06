@@ -1,6 +1,5 @@
 ﻿using CodingSolutions.API.Mappings;
 using CodingSolutions.API.Models.Cliente;
-using CodingSolutions.Domain;
 using CodingSolutions.Domain.Repositories;
 using FastEndpoints;
 

@@ -1,5 +1,4 @@
-﻿using CodingSolutions.API.Models;
-using CodingSolutions.API.Models.Loja;
+﻿using CodingSolutions.API.Models.Loja;
 using CodingSolutions.Domain.Repositories;
 using FastEndpoints;
 
