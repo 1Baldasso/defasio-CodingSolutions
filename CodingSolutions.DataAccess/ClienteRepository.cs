@@ -53,6 +53,7 @@ internal class ClienteRepository : IClienteRepository
         {
             throw new Exception("Cliente não encontrado");
         }
+        cliente.Saldo = clienteOriginal.Saldo;
         _context.Entry(clienteOriginal).CurrentValues.SetValues(cliente);
         await _context.SaveChangesAsync(ct);
     }

@@ -38,7 +38,6 @@ builder.Services.AddCors(x =>
 });
 
 var app = builder.Build();
-app.UseCors();
 app.UseFastEndpoints(options =>
 {
     options.Endpoints.RoutePrefix = "api";
@@ -51,5 +50,6 @@ app.UseFastEndpoints(options =>
 app.UseSwaggerGen();
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.Run();

@@ -13,7 +13,7 @@ public class UpdateProduto : Endpoint<ProdutoUpdateDTO>
     public override async Task HandleAsync(ProdutoUpdateDTO request, CancellationToken cancellationToken = default)
     {
         await Resolve<IProdutoRepository>().UpdateAsync(
-            request.ToEntity<ProdutoUpdateDTO, Produto>()
+            request.ToEntity()
                 .TransformProdutoData(),
             cancellationToken
             );

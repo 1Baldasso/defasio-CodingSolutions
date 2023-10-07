@@ -5,12 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace CodingSolutions.API.Models.Produto;
 
-public record ProdutoUpdateDTO : Domain.Produto
+public record ProdutoUpdateDTO
 {
     [FromRoute]
-    [OpenApiIgnore, JsonIgnore]
-    public new Guid Id { get; set; }
-
-    [OpenApiIgnore, JsonIgnore]
-    public new ICollection<ProdutoCliente> ProdutoPorCliente { get; set; }
+    public Guid Id { get; set; }
+    public string Nome { get; set; } = null!;
+    public string Descricao { get; set; } = null!;
+    public decimal Preco { get; set; } = 0;
 }

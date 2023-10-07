@@ -5,12 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace CodingSolutions.API.Models.Cliente;
 
-public record ClienteUpdateDTO : Domain.Cliente
+public record ClienteUpdateDTO
 {
     [FromRoute]
-    [OpenApiIgnore, JsonIgnore]
-    public new Guid Id { get; set; }
+    public Guid Id { get; set; }
 
-    [OpenApiIgnore, JsonIgnore]
-    public new ICollection<ProdutoCliente> ProdutoPorCliente { get; set; }
+    public string Nome { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string CPF { get; set; } = null!;
 }

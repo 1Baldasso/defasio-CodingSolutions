@@ -11,13 +11,15 @@ public class UpdateCliente : Endpoint<ClienteUpdateDTO>
 {
     public override void Configure()
     {
-        Put("clientes/{id:guid}");
+        Put("clientes/{id}");
         PreProcessors(new UpdateClientePreProcessor());
     }
 
     public override async Task HandleAsync(ClienteUpdateDTO req, CancellationToken ct)
     {
-        await Resolve<IClienteRepository>().UpdateAsync(req.ToEntity<ClienteUpdateDTO, Cliente>(), ct);
+        var entity = req.ToEntity();
+        entity.Id = req.Id;
+        await Resolve<IClienteRepository>().UpdateAsync(entity, ct);
         await SendOkAsync("Cliente atualizado com sucesso");
     }
 }
