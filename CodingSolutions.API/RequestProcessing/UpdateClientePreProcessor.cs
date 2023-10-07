@@ -9,7 +9,6 @@ public class UpdateClientePreProcessor : IPreProcessor<ClienteUpdateDTO>
 {
     public async Task PreProcessAsync(ClienteUpdateDTO req, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
     {
-        ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         var vr = await new ClienteValidator().ValidateAsync(req);
         if (!vr.IsValid)
         {

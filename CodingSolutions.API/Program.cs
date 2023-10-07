@@ -38,6 +38,7 @@ builder.Services.AddCors(x =>
 });
 
 var app = builder.Build();
+app.UseCors();
 app.UseFastEndpoints(options =>
 {
     options.Endpoints.RoutePrefix = "api";
@@ -47,12 +48,8 @@ app.UseFastEndpoints(options =>
     };
 });
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwaggerGen();
-}
+app.UseSwaggerGen();
 
-app.UseCors();
 app.UseHttpsRedirection();
 
 app.Run();
